@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        .group-btn .col-md-4{
+            background-color: #25473c;
+            font-size: 20px;
+            color: white;
+            padding: 10px 20px 20px 10px;
+            margin: 10px;
+            border-radius: 20px;
+            width: 250px;
+            height: 18px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.5s ease;
+            
+        }
+        .group-btn .col-md-4:hover{
+            text-decoration: none;
+            background-color: #02784d;
+            transform: scale(1.4);
+        }
+        .group-btn{
+            display: flex;
+            text-align: center;
+            justify-content: space-around;
+            margin-top: 300px;
+        }
+    </style>
+    </head>
+    <body>
+
+    <from class="container group-btn" action="./ViewStudentServlet" method ="post">
+        <form class="btn-item" action="./ViewStudentServlet" method="post">
+            <input type="hidden" name="selectedPage" value="student" />
+            <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;"><strong>View Student List</strong></a>
+        </form>
+
+        <form class="btn-item" action="./ViewStudentServlet" method="post">
+          <input type="hidden" name="selectedPage" value="course" />
+          <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;"><strong>View Course List</strong></a>
+        </form>
+
+        <form class="btn-item" action="./ViewStudentServlet" method="post">
+          <input type="hidden" name="selectedPage" value="student_course" />
+          <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;"><strong>View Student-Course</strong></a>
+        </form>
+    </from>
+    </body>
+</html>
+
+
+<!--https://itphutran.com/gioi-thieu-ve-servlet-request/-->
