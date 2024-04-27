@@ -21,14 +21,18 @@
                     <input type="hidden" name="selectedPage" value="home" />
                     <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;" style="text-decoration: none;"><strong>List Student</strong></a>
                 </form>  
-                <input type="search" class="col-md-4 search" placeholder="  Entey your keyword...">
-                <a href="#">
-                    <img src="./media/search.png" alt="find" class="search-icon">
-                </a>
-                <select class="chooseType">
-                    <option value="option1">Name</option>
-                    <option value="option2">Year</option>
-                  </select>
+                <form class="col-md-4" action="./ViewStudentServlet" method="post" style="display:flex">
+                    <input type="search" class="search" placeholder="  Entey your keyword..." name="keyword">
+                    <input type="hidden" name="selectedPage" value="findCourse">
+                    <a href="#" onclick="this.parentNode.submit(); return false;">
+                        <img src="./media/search.png" alt="find" class="search-icon">
+                    </a>
+                    <select class="chooseType" name="criteria">
+                        <option value="name">Name</option>
+                        <option value="year">Year</option>
+                    </select>
+                </form>
+                
             </div>
             <div class="col-md-6 group-btn">
                 <form class="btn btnSOY" action="./ViewStudentServlet" method="post">
@@ -76,7 +80,6 @@
                 <tbody>
                     <c:forEach var="item" items="${data}" varStatus="loop">
                      
-                    <!--<tr onclick="redirectToSingleCourseServlet(this)">-->
                     <tr>
                         <td><strong>${loop.index + 1}</strong></td>
                         <td>${item.getID()}</td>
@@ -123,10 +126,7 @@
 
                 </tbody>
             </table>
-            <script>
-                
-                
-            </script>
+
 
         </main>
     </div>

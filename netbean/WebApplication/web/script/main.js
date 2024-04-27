@@ -24,12 +24,100 @@ document.addEventListener('DOMContentLoaded', function() {
         isButtonClick=false;
         });   // END CLICK ON SINGLE COURSE
     });
+    
+    
+    // CLICK ON SINGLE STUDENT 
+    var STrows = document.querySelectorAll('#myStudentTable tr');
+    //lặp qua từng hàng xử lý thao tác click 
+    STrows.forEach(function(STrow){
+        var buttons = STrow.querySelectorAll('button');
+        var isButtonClick = false;
+        buttons.forEach(function(button){
+                isButtonClick=true;
+        });
+        
+        //CLICK ON SINGLE COURSE
+        STrow.addEventListener('click',function(){
+        if(!isButtonClick){
+            //lấy các thông tin trong hàng đó 
+            var tds = STrow.querySelectorAll('td');
+            var IDValue = tds[1].textContent;
+            var NameValue = tds[2].textContent;
+            var type = "singleStudent";
+            var url = "ViewStudentServlet?idStudent=" + encodeURIComponent(IDValue) + "&selectedPage=" + encodeURIComponent(type);
+            window.location.href = url;
+        }
+        isButtonClick=false;
+        });   // END CLICK ON SINGLE COURSE
+    });
 });
 
 // in alert ra màn hình 
 function showAlert(errorMess){
     alert(errorMess);
 }
+
+// ERROr METHOD 
+//function SortTable(){
+//    var table = document.getElementById("myStudentTable");
+//    var rows = Array.from(table.getElementByTagName("tr"));
+//    // lấy giá trị trạng thái sắp xếp hiện tại từ thuộc tính data-sort 
+//    var currentSort = table.getAttribute("data-sort");
+//    //đảo ngược giá trị trạng thái sắp xếp 
+//    var newSort = currentSort === "asc" ? "desc" : "asc";
+//    // sắp xếp hàng dữ liệu theo tên 
+//    rows.sort(function(rowA, rowB){
+//        var nameA = rowA.getElementsByTagName("td")[2].textContent;
+//        var nameB = rowB.getElementsByTagName("td")[2].textContent;
+//        System.out.println(nameA);
+//        System.out.println(nameB);
+//        if(newSort === "asc"){
+//            return nameA.localeCompare(nameB);
+//        }
+//        else {
+//            return nameB.localeCompare(nameA);
+//        }
+//    }) ;
+//    //xóa các hàng hiện tại trong bảng 
+//    while(table.rows.length > 1){
+//        table.deleteRow(1);
+//    }
+//    // thêm các hàng đã sắp xếp vào bảng 
+//    rows.forEach(function(row){
+//       table.appendChild(row); 
+//    });
+//    //cập nhật giá trị trạng thái sắp xếp mới vào thuộc tính data-sort 
+//    table.setAttribute("data-sort",newSort);
+//}
+
+function SortTable(){
+    let table, i, x, y;
+    table = document.getElementById("myStudentTable");
+    let Switching = true;
+    
+    while(Switching){
+        Switching = false;
+        let rows = table.rows;
+        
+        for ( i = 1; i < (rows.length - 1); i++){
+            var Switch = false;
+            x = rows[i].getElementsByTagName("td")[2];
+            x = rows[i+1].getElementsByTagName("td")[2];
+            
+            if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()){
+                Switch = true;
+                break;
+            }
+        }
+        if(Switch){
+            rows[i].parentNode.insertBefore(rows[i+1],rows[i]);
+            Switching = true;
+        }
+    }
+}
+
+
+
 //xử lý sự kiện nhấn vào nút edit 
 
 function enableEdit(button){

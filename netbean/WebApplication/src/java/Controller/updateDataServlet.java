@@ -82,13 +82,13 @@ public class updateDataServlet extends HttpServlet  {
             else if(type.equals("delete-student-in-course")){
                 String idCourse = req.getParameter("id-student");
                 String idStudent = req.getParameter("id-course");
-                System.out.println("IDCourse: " + idCourse);
-                System.out.println("IDStudent: " + idStudent);
+//                System.out.println("IDCourse: " + idCourse);
+//                System.out.println("IDStudent: " + idStudent);
 
                 // xóa trong database
                 boolean result = studentDAO.deleteStudentInCourse(idStudent, idCourse);
-                System.out.println("result-delete: " + result);
-                System.out.println(studentDAO.getStudentInCourse(idCourse).size());
+//                System.out.println("result-delete: " + result);
+//                System.out.println(studentDAO.getStudentInCourse(idCourse).size());
                 req.setAttribute("data", studentDAO.getStudentInCourse(idCourse));
                 req.setAttribute("idCourse", idCourse);
                 req.setAttribute("nameCourse", studentDAO.getCourseName(idCourse));

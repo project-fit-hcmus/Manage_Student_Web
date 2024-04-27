@@ -12,6 +12,7 @@ body{
     display: flex;
 }
 
+
 .header .row .group-search .search{
     height: 40px;
     width: 500px;
@@ -128,7 +129,7 @@ table, th, td{
 
 .table-sample{
     /* min-height: 100vh; */
-    background: url("../media/viewbg.jpg");
+    background: url("../media/mainBg.jpg");
  
     
     display: flex;

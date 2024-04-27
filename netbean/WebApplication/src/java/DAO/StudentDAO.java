@@ -4,8 +4,7 @@
  */
 package DAO;
 import Database.DBConnection;
-import entity.Student;
-import entity.Course;
+import entity.*;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -234,6 +233,7 @@ public class StudentDAO {
             }
         }
     }
+    
     public boolean deleteStudentInCourse(String idStudent, String idCourse) {
     int rowsUpdated = 0;
     try {
@@ -255,6 +255,7 @@ public class StudentDAO {
     }
     return rowsUpdated > 0;
 }   
+    
     public void DeleteCourseByID(String id){
         try{
             String sql = "DELETE COURSE WHERE ID_COURSE= '"+id + "'";
@@ -355,11 +356,29 @@ public class StudentDAO {
 
     public String getCourseName(String courseID){
         ResultSet rs = null;
-        String studentName = null;
+        String courseName = null;
         try{
             String sql = "SELECT NAME \n" +
                         "FROM COURSE \n" +
                         "WHERE ID_COURSE = '" + courseID+"'";
+            statement = connect.prepareStatement(sql);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                courseName = rs.getString("NAME");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return courseName;
+    }
+
+    public String getStudentName(String studentID){
+        ResultSet rs = null;
+        String studentName = null;
+        try{
+            String sql = "SELECT NAME \n" +
+                        "FROM STUDENT \n" +
+                        "WHERE ID_STUDENT = '" + studentID+"'";
             statement = connect.prepareStatement(sql);
             rs = statement.executeQuery();
             if (rs.next()) {
@@ -370,7 +389,7 @@ public class StudentDAO {
         }
         return studentName;
     }
-
+    
     public void AddStudentToCourse(String idStudent, String idCourse, float grade){
         // tạo id mới cho student-course 
         String id = null;
@@ -454,5 +473,57 @@ public class StudentDAO {
         
         }
         return exists;
+    }
+
+    public List<CourseOfStudent> getAllCourseOfStudent(String studentId){
+        ResultSet rs = null;
+        List<CourseOfStudent> lists = new ArrayList<>();
+        try{
+            String sql = "SELECT CR.*, CS.GRADE\n" +
+                        "FROM COURSE CR, COURSE_STUDENT CS\n" +
+                        "WHERE CR.ID_COURSE = CS.COURSE_ID AND CS.STUDENT_ID = ? ";
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, studentId);
+            rs = statement.executeQuery();
+            while(rs.next()){
+                CourseOfStudent course = new CourseOfStudent();
+                course.setID(rs.getString(1));
+                course.setNAME(rs.getString(2));
+                course.setLECTURE(rs.getString(3));
+                course.setYEAR(rs.getInt(4));
+                course.setNOTES(rs.getString(5));
+                course.setGRADE(rs.getFloat(6));
+                lists.add(course);
+            }
+                
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return lists;
+    }
+
+    public List<StudentOfYear> getAllStudentInYear(int year){
+        ResultSet rs = null;
+        List<StudentOfYear> lists =  new ArrayList<>();
+        try{
+            String sql = "SELECT ST.ID_STUDENT, ST.NAME, CR.NAME, CS.GRADE\n" +
+                        "FROM STUDENT ST, COURSE CR, COURSE_STUDENT CS\n" +
+                        "WHERE ST.ID_STUDENT = CS.STUDENT_ID AND CR.ID_COURSE = CS.COURSE_ID AND CR.YEAR = ?";
+            statement = connect.prepareStatement(sql);
+            statement.setInt(1, year);
+            rs = statement.executeQuery();
+            while(rs.next()){
+                StudentOfYear temp = new StudentOfYear();
+                temp.setID(rs.getString(1));
+                temp.setNAME(rs.getString(2));
+                temp.setCOURSE(rs.getString(3));
+                temp.setGRADE(rs.getFloat(4));
+                lists.add(temp);
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return lists;
     }
 }

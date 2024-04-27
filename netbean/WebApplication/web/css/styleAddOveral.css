@@ -1,0 +1,78 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 27, 2024, 12:21:45 AM
+    Author     : User
+*/
+
+body{
+            margin: 0px;
+            padding: 0px;
+            background-image: url("../media/addBg.jpg");
+            background-size: cover;
+            background-position: center;
+}
+.overal{
+    display: flex;
+}
+.title{
+    width: 740px;
+    height: 750px;
+}
+.title h1{
+    font-size: 50px;
+    color: white;
+    font-family: cursive;
+    padding: 15px;
+    margin-top: 200px;
+}
+.title p em{
+    color: white;
+    font-size: 18px;
+    font-family: cursive;
+    padding-left: 10px;
+}
+.title p{
+    margin-left: 20px;
+}
+
+.content{
+    align-content:center;
+}
+        
+.add-dialog{
+    width: 500px;
+    height: 350px;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .9rem #0005;
+    border-radius: .8rem;
+    overflow: hidden;
+    justify-content: center;
+    
+}
+
+.add-dialog{
+    padding-top: 50px;
+}
+
+.add-dialog input{
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+    margin: 6px;
+    margin-left: 100px;
+    font-family: cursive;   
+}
+
+.add-dialog button{
+        border-radius: 30px;
+    padding: 10px 60px 10px 60px;
+    margin: 20px 40px 20px 40px;
+    font-family: cursive;
+
+}

@@ -152,7 +152,7 @@ table, th, td{
 
 .table-sample{
     /* min-height: 100vh; */
-    background: url("../media/viewbg.jpg");
+    background: url("../media/mainBg.jpg");
  
     
     display: flex;

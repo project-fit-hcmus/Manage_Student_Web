@@ -12,22 +12,25 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP View Student Page</title>
         <link rel="stylesheet" href="./css/styleStudent.css">
+        <script src="./script/main.js"> </script>
     </head>
     <body>
         
         <div class="container-fluid header">
         <div class="row">
             <div class="col-md-6 group-search">
-                <!--<p class="col-md-2 title" ><strong>List Student</strong></p>-->
                 <form class="col-md-6 title" action="./ViewStudentServlet" method="post" style="padding-top:15px">
                     <input type="hidden" name="selectedPage" value="home" />
                     <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;" style="text-decoration: none;"><strong>List Student</strong></a>
                 </form>  
-                
-                <input type="search" class="col-md-4 search" placeholder="  Entey your keyword...">
-                <a href="#">
-                    <img src="./media/search.png" alt="find" class="search-icon">
-                </a>
+                <form class="col-md-4" action="./ViewStudentServlet" method="post" style="display:flex">
+                    <input type="search" class="search" placeholder="  Entey your keyword..." name="keyword">
+                    <input type="hidden" name="selectedPage" value="findStudent">
+                    <a href="#" onclick="this.parentNode.submit(); return false;">
+                        <img src="./media/search.png" alt="find" class="search-icon">
+                    </a>                    
+                </form>
+
             </div>
             <div class="col-md-6 group-btn">
                 <form class="btn btnSOY" action="./ViewStudentServlet" method="post">
@@ -52,7 +55,7 @@
           <input type="hidden" name="selectedPage" value="addStudent" />
           <a href="#" onclick="this.parentNode.submit(); return false;">
             <img src="./media/add.png" alt="add button" class="btnAdd">
-        </a>
+          </a>
         </form>
         
     </div>
@@ -60,7 +63,7 @@
     <!--Hiển thị bảng danh sách dữ liệu-->
     <div class="container table-sample">
         <main class="table">
-            <table class="table_body">
+            <table class="table_body" id="myStudentTable" >
                 <thead>
                     <tr>
                         <th>ON</th>
@@ -69,7 +72,18 @@
                         <th>BIRTHDAY</th>
                         <th>ADDRESS</th>
                         <th>NOTES</th>
-                        <th>SORT</th>
+                        <th>
+<!--                            <form action="./ViewStudentServlet" method="post">
+                                <input type="hidden" name="selectedPage" value="sortStudent" />
+                                <input type="hidden" name="list" value="${data}">-->
+                                <button  onclick="SortTable();">
+                                  <img src="./media/ascending.png" alt="sort button" class="btnSort" ">
+                                </button>
+                            <!--</form>-->
+                            <script>
+                                document.getElementById("myStudentTable").setAttribute("data-sort", "none");
+                            </script>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

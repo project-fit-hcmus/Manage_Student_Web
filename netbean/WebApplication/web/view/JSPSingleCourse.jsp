@@ -65,7 +65,7 @@
         </div>
         <form class="col-md-6" action="./ViewStudentServlet" method="post">
           <input type="hidden" name="selectedPage" value="addStudentToCourse" />
-          <input typ="hidden" name="idCourse" value="${idCourse}">
+          <input type="hidden" name="idCourse" value="${idCourse}">
           <a href="#" onclick="this.parentNode.submit(); return false;">
             <img src="./media/add.png" alt="add button" class="btnAdd">
         </a>

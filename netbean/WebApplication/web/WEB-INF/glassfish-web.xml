@@ -35,6 +35,10 @@
       <wellcome-file>JSPAddStudent.jsp</wellcome-file>
       <wellcome-file>JSPAddCourse.jsp</wellcome-file>
       <wellcome-file>JSPAddStudentToCourse.jsp</wellcome-file>
+      <wellcome-file>JSPSingleStudent.jsp</wellcome-file>
+      <wellcome-file>JSPStudentOfYear.jsp</wellcome-file>
+
+
 
   </welcome-list-file>
 </glassfish-web-app>
