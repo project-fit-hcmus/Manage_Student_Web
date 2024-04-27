@@ -15,8 +15,6 @@ import entity.Student;
 import java.util.*;
 import java.time.LocalDate;
 
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 /**
  *
@@ -24,10 +22,13 @@ import java.util.ArrayList;
  */
 @WebServlet("/ViewStudentServlet")
 public class ViewStudentServlet extends HttpServlet{
+    
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
         StudentDAO studentDAO = new StudentDAO();   
         String action = request.getParameter("selectedPage");
 //        System.out.println(action);

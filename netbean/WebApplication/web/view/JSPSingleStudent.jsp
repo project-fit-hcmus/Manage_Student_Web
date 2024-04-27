@@ -79,7 +79,7 @@
                             <td>${item.getYEAR()}</td>
                             <td>${item.getNOTES()}</td>
                             <td>${item.getGRADE()}</td>
-                            <td>nothing</td>
+                            <td>Nothing</td>
                         </tr>
                     
                      </c:forEach>

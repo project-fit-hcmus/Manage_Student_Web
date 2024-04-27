@@ -5,11 +5,13 @@
 package DAO;
 import Database.DBConnection;
 import entity.*;
+import java.io.UnsupportedEncodingException;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.UUID;
 
 /**
  *
@@ -219,8 +221,11 @@ public class StudentDAO {
      
     public void DeleteStudentByID(String id){
         try{
-            String sql = "DELETE STUDENT WHERE ID_STUDENT="+id;
+            String sql = "DELETE FROM COURSE_STUDENT WHERE STUDENT_ID=?\n" +
+                          "DELETE FROM STUDENT WHERE ID_STUDENT = ?";
             statement = connect.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.setString(2,id);
             statement.executeQuery();
         }catch(SQLException e){
             e.printStackTrace();
@@ -258,9 +263,12 @@ public class StudentDAO {
     
     public void DeleteCourseByID(String id){
         try{
-            String sql = "DELETE COURSE WHERE ID_COURSE= '"+id + "'";
+            String sql = "DELETE FROM COURSE_STUDENT WHERE COURSE_ID=?\n" +
+                        "DELETE FROM COURSE WHERE ID_COURSE =?";
             statement = connect.prepareStatement(sql);
-            statement.executeQuery();
+            statement.setString(1, id);
+            statement.setString(2, id);
+            statement.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
         }finally{
@@ -526,4 +534,62 @@ public class StudentDAO {
         }
         return lists;
     }
+
+    
+    
+    
+    public void updateCourse(String id, String name, String lecture, int year, String notes){
+        try{
+            String sql = "UPDATE COURSE\n" +
+                        "SET NAME = '"+ name +"', LECTURE = '"+lecture+"' , NOTES ='"+notes+"' , YEAR = " + year +"\n" +
+                        "WHERE ID_COURSE ='"+id+"' ";
+            statement = connect.prepareStatement(sql);
+            System.out.println(sql);
+            statement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
+    
+    //TEST 
+    public void updateStudent(Student st){
+   
+        try{
+            String sql = "UPDATE STUDENT\n" +
+                        "SET NAME = '"+ st.getNAME() +"', ADDRESS = '"+st.getADDRESS()+"' , NOTES ='"+st.getNOTES()+"'\n" +
+                        "WHERE ID_STUDENT ='"+st.getID()+"' ";
+            statement = connect.prepareStatement(sql);
+            System.out.println(sql);
+            statement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
+
+
+
+//public void updateStudent(String id, String name, String address, String notes) throws UnsupportedEncodingException{
+//        String encodeName = new String(name.getBytes("UTF-8"),"UTF-8");
+//        System.out.println("Name after encode : " + encodeName);
+//                System.out.println("Name before encode : " + name);
+//
+//        
+//            
+//        try{
+//            String sql = "UPDATE STUDENT\n" +
+//                        "SET NAME = '"+ encodeName +"', ADDRESS = '"+address+"' , NOTES ='"+notes+"'\n" +
+//                        "WHERE ID_STUDENT ='"+id+"' ";
+//            statement = connect.prepareStatement(sql);
+//            System.out.println(sql);
+//            statement.executeUpdate();
+//        }catch(SQLException e){
+//            e.printStackTrace();
+//        }
+//    }

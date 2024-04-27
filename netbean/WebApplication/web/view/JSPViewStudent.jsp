@@ -4,7 +4,8 @@
     Author     : User
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +13,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP View Student Page</title>
         <link rel="stylesheet" href="./css/styleStudent.css">
-        <script src="./script/main.js"> </script>
+        <!--<script src="./script/main.js"> </script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         
@@ -76,7 +78,7 @@
 <!--                            <form action="./ViewStudentServlet" method="post">
                                 <input type="hidden" name="selectedPage" value="sortStudent" />
                                 <input type="hidden" name="list" value="${data}">-->
-                                <button  onclick="SortTable();">
+                                <button  onclick="SortTable();" class="sort-icon">
                                   <img src="./media/ascending.png" alt="sort button" class="btnSort" ">
                                 </button>
                             <!--</form>-->
@@ -102,14 +104,12 @@
                                 <form action="./updateDataServlet" method="post">
                                     <input type="hidden" name="type" value="delete-student">
                                     <input type="hidden" name="id" value="${item.getID()}">
-                                    <button class="delete-icon" type="submit" >
-                                        <img src="./media/trash.png" alt="trash-icon">
-                                    </button>
+                                    <button class="delete-icon" type="submit" >Delete</button>
                                 </form>
-                                    <!--chưa xử lý-->
-                                <button class="edit-icon" type="submit" formaction="" method="post">
-                                    <img src="./media/edit.png" alt="edit-icon">
-                                </button>
+                                
+                                <span class="edit-group">
+                                    <button class="edit-icon" type="submit" formaction="" method="post">Edit </button>
+                                </span>
                             </span>
                         </td>
                     </tr>
@@ -121,8 +121,111 @@
 
         </main>
     </div>
+    <script contentType="text/javascript; charset=UTF-8" pageEncoding="UTF-8">           // lỗi tiếng việt
+    var isEditing = false;
+    $(document).ready(function (){
+        // xử lý button edit
+        var originName;
+//        var originBirth;
+        var originAddr;
+        var originNote;
+        $('#myStudentTable').on('click','.edit-icon',function(){
+            alert("click on edit button");
+            isEditing = true;
+
+            var row = $(this).closest('tr');
+            var name = row.find('td').eq(2).text();
+//            var birthday = row.find('td').eq(3).text();
+            var address = row.find('td').eq(4).text();
+            var notes = row.find('td').eq(5).text();
+            originName = name;
+//            originBirth = birthday;
+            originAddr = address;
+            originNote = notes;
+
+            row.find('td').eq(2).html('<input type="text" name="name" value="' + name + '" class="edit-name" placeholder="' + name + '" accept-charset="UTF-8">');
+//            row.find('td').eq(3).html('<input type="date" class="edit-birth" name="birth" value="' + birthday + '" placeholder="dd/mm/yyyy">');
+            row.find('td').eq(4).html('<input type="text" class="edit-address" name="address" value="' + address + '" placeholder="enter-address" accept-charset="UTF-8">');
+            row.find('td').eq(5).html('<input type="text" class="edit-notes" name="notes" value="' + notes + '" placeholder="enter-notes" accept-charset="UTF-8">');
+            row.find('.edit-group').html('<button type="submit" name="button" value="save" class="btn-save">Save</button> <button type="submit" name="button" value="cancel" class="btn-cancel">Cancel</button>')
+        });
+        // xử lý button cancel (không lưu) 
+        $('#myStudentTable').on('click', '.btn-cancel', function() {
+            isEditing = false;
+            var row = $(this).closest('tr');
+            row.find('td').eq(2).html(originName);
+//            row.find('td').eq(3).html(originBirth);
+            row.find('td').eq(4).html(originAddr);
+            row.find('td').eq(5).html(originNote);
+            row.find('.edit-group').html('<button class="edit-icon" type="submit">Edit </button>');
+        });
+        
+        // xử lý button save (lưu vào database)
+        $('#myStudentTable').on('click', '.btn-save', function() {
+            isEditing = false;
+            var row = $(this).closest('tr');
+            var id = row.find('td').eq(1).text();
+            var name = row.find('td').eq(2).find('input').val();
+//            var birthday = row.find('td').eq(3).find('input').val();
+            var address = row.find('td').eq(4).find('input').val();
+            var notes = row.find('td').eq(5).find('input').val();
+
+            row.find('td').eq(2).html(name);
+//            row.find('td').eq(3).html(birthday);
+            row.find('td').eq(4).html(address);
+            row.find('td').eq(5).html(notes);
+            row.find('.edit-group').html('<button class="edit-icon" type="submit" >Edit </button>');
+            
+            // chuyển tới servlet để lưu data(phần này phải sử dụng ajax để tránh xung đột giữa các button
+            $.ajax({
+                url: "updateDataServlet",
+                method: "POST",
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: $.param({
+                    idStudent: id,
+                    newName: encodeURIComponent(name),
+                    newNotes: encodeURIComponent(notes),
+                    newAddr: encodeURIConponent(address),
+//                    newBirthday: birthday,
+                    type: "updateStudent"
+                }),
+                success: function(response) {
+                    // Cập nhật dữ liệu trên trang web
+                    row.find('td').eq(2).html(name);
+//                    row.find('td').eq(3).html(birthday);
+                    row.find('td').eq(4).html(address);
+                    row.find('td').eq(5).html(notes);
+                    row.find('.edit-group').html('<button class="edit-icon" type="submit" >Edit </button>');
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+            
+        });
+        //XỬ LÝ SỰ KIỆN CHỌN VÀO 1 HÀNG     
+        $('#myStudentTable').on('click','tr',function(){
+            if($(event.target).is('button')){
+                event.stopPropagation();        // ngăn chặn sự kiện click lan ra các phần tử con
+                return;     // không thực hiện xử lý gì nếu người dùng chọn vào nút 
+            }
+            if(isEditing){
+                //to do nothing
+                return;
+            }
+            
+            var tds = $(this).find('td');
+            var IDValue = tds.eq(1).text();
+            var NameValue = tds.eq(2).text();
+            var type = "singleStudent";
+            var url = "ViewStudentServlet?idStudent=" + encodeURIComponent(IDValue) + "&selectedPage=" + encodeURIComponent(type);
+            window.location.href=url;
+        });
+    });                 
+    </script>                                
     
     </body>
 
 </html>
 <!-- create table instruction: https://www.youtube.com/watch?v=Ay8BXbAmEYM -->
+<!--reference edit row in table : https://github.com/gerasimcode/jquery/blob/main/inlineEditing.html -->

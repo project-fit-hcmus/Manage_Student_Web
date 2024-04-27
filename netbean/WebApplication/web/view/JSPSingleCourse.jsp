@@ -61,14 +61,14 @@
     <div class="container-fluid title-content">
         <div class="col-md-6 title">
             <h1><strong style="font-size:35px">${nameCourse}</strong></h1>
-            <p style="font-size: 18px;margin-top: 27px;">${data.size()} Students</p>
+            <p style="ont-size: 21px; margin-top: 36px">${data.size()} Students</p>
         </div>
         <form class="col-md-6" action="./ViewStudentServlet" method="post">
-          <input type="hidden" name="selectedPage" value="addStudentToCourse" />
-          <input type="hidden" name="idCourse" value="${idCourse}">
-          <a href="#" onclick="this.parentNode.submit(); return false;">
-            <img src="./media/add.png" alt="add button" class="btnAdd">
-        </a>
+            <input type="hidden" name="selectedPage" value="addStudentToCourse" />
+            <input type="hidden" name="idCourse" value="${idCourse}">
+            <a href="#" onclick="this.parentNode.submit(); return false;">
+              <img src="./media/add.png" alt="add button" class="btnAdd">
+            </a>
         </form>
 
     </div>

@@ -161,7 +161,7 @@ table, th, td{
 
 main.table{
     margin-top: 50px;
-    width: 82vw;
+    width: 95vw;
     height: 90vh;
     background-color: #fff5;
     backdrop-filter: blur(7px);
@@ -215,18 +215,24 @@ tbody tr:hover{
     background-color: #fff6;
 }
 
-table button{
-    border: 0px;
-    background-color: transparent;
-    border-radius: 10px;
-    padding: 0px 10px 0px 10px;
-}
-table button img{
-    width: 80%;
-    height: 80%;
+thead tr th .sort-icon{
+        border: 0px;
+    background: transparent;
 }
 
-/* chỉnh lại màu button khi hover ở đây*/ 
-table button:hover{
-    background-color: #25473c;
+tbody tr td span form .delete-icon{
+    background-color: #CC0000;
+    color: white;
+    border-radius: 15px;
+    padding: 5px 16px 5px 15px;
+    margin-top: 10px;
+    border: 0px;
+}
+
+tbody tr td span  .edit-icon, tbody tr td span .btn-save, tbody tr td span .btn-cancel{
+        padding: 5px 15px 5px 15px;
+    border: 0px;
+    border-radius: 15px;
+    background-color: #006600;
+    color: white;
 }

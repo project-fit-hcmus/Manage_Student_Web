@@ -26,6 +26,10 @@
         <page-encoding>UTF-8</page-encoding>
     </jsp-property-group>
   </jsp-config>
+
+    <connector>
+        <parameter name="URIEncoding" value="UTF-8" />
+    </connector>
   <welcome-list-file>
       <welcome-file>index.html</welcome-file>
       <welcome-file>JSPViewStudent.jsp</welcome-file>

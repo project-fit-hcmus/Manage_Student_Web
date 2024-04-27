@@ -8,14 +8,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.text.ParseException;
 import entity.*;
+import java.io.PrintWriter;
+
 
 /**
  *
@@ -26,6 +24,10 @@ public class updateDataServlet extends HttpServlet  {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+        
         StudentDAO studentDAO = new StudentDAO();   
         String id = req.getParameter("id");
         String type = req.getParameter("type");
@@ -41,7 +43,10 @@ public class updateDataServlet extends HttpServlet  {
                 req.getRequestDispatcher("view/JSPViewCourse.jsp").forward(req, resp);
             }//END DELETE COURSE
             else if(type.equals("delete-student")){
+                
                 studentDAO.DeleteStudentByID(id);
+                System.out.println("id student delte: " +id );
+                System.out.println("After Delete: " + studentDAO.getAllStudent());
                 //chuyển hướng về lại trang JSPViewCourse
                 req.setAttribute("data", studentDAO.getAllStudent());
                 req.getRequestDispatcher("view/JSPViewStudent.jsp").forward(req, resp);
@@ -80,8 +85,8 @@ public class updateDataServlet extends HttpServlet  {
                 }
             }//END ADD COURSE
             else if(type.equals("delete-student-in-course")){
-                String idCourse = req.getParameter("id-student");
-                String idStudent = req.getParameter("id-course");
+                String idCourse = req.getParameter("id-course");
+                String idStudent = req.getParameter("id-student");
 //                System.out.println("IDCourse: " + idCourse);
 //                System.out.println("IDStudent: " + idStudent);
 
@@ -119,6 +124,44 @@ public class updateDataServlet extends HttpServlet  {
                     req.getRequestDispatcher("/view/JSPSingleCourse.jsp").forward(req, resp);
                 }
             }
+            else if(type.equals("updateStudent")){
+                Student student;
+                student = new Student();
+                student.setID(req.getParameter("idStudent"));
+                student.setADDRESS(req.getParameter("newAddr"));
+                student.setNAME(req.getParameter("newName"));
+                student.setNOTES(req.getParameter("newNotes"));
+                
+
+                studentDAO.updateStudent(student);
+                // gửi phản hồi 
+                resp.setContentType("text/plain");
+                PrintWriter out = resp.getWriter();
+                out.print("Success"); // Hoặc bất kỳ thông báo thành công nào khác
+                out.flush();
+            }
+            else if(type.equals("updateCourse")){
+                 String idCourse = req.getParameter("idCourse");
+                 String name = req.getParameter("newName");
+                 String notes = req.getParameter("newNotes");
+                 String lecture = req.getParameter("newLecture");
+                 String year = req.getParameter("newYear");
+                 
+//                 System.out.println("ID Course: " + idCourse);
+//                 System.out.println("Name: " + name);
+//                 System.out.println("Lecture: " + lecture);
+//                 System.out.println("Year: " + year);
+//                 System.out.println("Notes: " + notes);
+                 
+                 studentDAO.updateCourse(idCourse, name, lecture, Integer.parseInt(year), notes);
+                 resp.setContentType("text/plain");
+                PrintWriter out = resp.getWriter();
+                out.print("Success"); // Hoặc bất kỳ thông báo thành công nào khác
+                out.flush();
+                 
+                
+            }
+                
          
             
         }

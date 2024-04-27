@@ -19,7 +19,7 @@ public class DBConnection {
         //đăng ký drive 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://localhost:1433;databaseName=ManageStudent;user=sa;password=123456; encrypt=false; trustServerCertificate=true";
+            String connectionURL = "jdbc:sqlserver://localhost:1433;databaseName=ManageStudent;user=sa;password=123456; encrypt=false; trustServerCertificate=true; characterEncoding=UTF-8";
             connect = DriverManager.getConnection(connectionURL);
 
         } catch (ClassNotFoundException  | SQLException e) {
