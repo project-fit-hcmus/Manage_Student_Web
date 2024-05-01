@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 import entity.*;
+import jakarta.mail.util.StreamProvider;
 import java.io.PrintWriter;
 
 
@@ -31,7 +32,6 @@ public class updateDataServlet extends HttpServlet  {
         StudentDAO studentDAO = new StudentDAO();   
         String id = req.getParameter("id");
         String type = req.getParameter("type");
-//        System.out.println(id);
         if(type==null){
             resp.getWriter().println("Empty Action");
         }
@@ -87,8 +87,6 @@ public class updateDataServlet extends HttpServlet  {
             else if(type.equals("delete-student-in-course")){
                 String idCourse = req.getParameter("id-course");
                 String idStudent = req.getParameter("id-student");
-//                System.out.println("IDCourse: " + idCourse);
-//                System.out.println("IDStudent: " + idStudent);
 
                 // xóa trong database
                 boolean result = studentDAO.deleteStudentInCourse(idStudent, idCourse);
@@ -132,12 +130,18 @@ public class updateDataServlet extends HttpServlet  {
                 student.setNAME(req.getParameter("newName"));
                 student.setNOTES(req.getParameter("newNotes"));
                 
+                System.out.println(student.getID());
+                System.out.println(student.getNAME());
+                System.out.println(student.getADDRESS());
+                System.out.println(student.getNOTES());
+
+                
 
                 studentDAO.updateStudent(student);
                 // gửi phản hồi 
                 resp.setContentType("text/plain");
                 PrintWriter out = resp.getWriter();
-                out.print("Success"); // Hoặc bất kỳ thông báo thành công nào khác
+                out.print("Success");
                 out.flush();
             }
             else if(type.equals("updateCourse")){

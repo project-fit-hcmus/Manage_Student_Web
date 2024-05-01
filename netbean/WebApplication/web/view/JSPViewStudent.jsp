@@ -183,9 +183,9 @@
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 data: $.param({
                     idStudent: id,
-                    newName: encodeURIComponent(name),
-                    newNotes: encodeURIComponent(notes),
-                    newAddr: encodeURIConponent(address),
+                    newName: name,
+                    newNotes: notes,
+                    newAddr: address,
 //                    newBirthday: birthday,
                     type: "updateStudent"
                 }),

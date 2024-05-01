@@ -541,7 +541,7 @@ public class StudentDAO {
     public void updateCourse(String id, String name, String lecture, int year, String notes){
         try{
             String sql = "UPDATE COURSE\n" +
-                        "SET NAME = '"+ name +"', LECTURE = '"+lecture+"' , NOTES ='"+notes+"' , YEAR = " + year +"\n" +
+                        "SET NAME = N'"+ name +"', LECTURE = N'"+lecture+"' , NOTES = N'"+notes+"' , YEAR = " + year +"\n" +
                         "WHERE ID_COURSE ='"+id+"' ";
             statement = connect.prepareStatement(sql);
             System.out.println(sql);
@@ -559,7 +559,7 @@ public class StudentDAO {
    
         try{
             String sql = "UPDATE STUDENT\n" +
-                        "SET NAME = '"+ st.getNAME() +"', ADDRESS = '"+st.getADDRESS()+"' , NOTES ='"+st.getNOTES()+"'\n" +
+                        "SET NAME = N'"+ st.getNAME() +"', ADDRESS = N'"+st.getADDRESS()+"' , NOTES = N'"+st.getNOTES()+"'\n" +
                         "WHERE ID_STUDENT ='"+st.getID()+"' ";
             statement = connect.prepareStatement(sql);
             System.out.println(sql);
