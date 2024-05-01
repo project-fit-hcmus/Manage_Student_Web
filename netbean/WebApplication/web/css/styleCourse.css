@@ -216,8 +216,18 @@ tbody tr:hover{
 }
 
 thead tr th .sort-icon{
-        border: 0px;
+    border: 0px;
     background: transparent;
+}
+
+thead tr th form .sort-icon img{
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+}
+
+thead tr th form .sort-icon img:hover{
+    background-color: white;
+    
 }
 
 tbody tr td span form .delete-icon{
@@ -236,3 +246,5 @@ tbody tr td span  .edit-icon, tbody tr td span .btn-save, tbody tr td span .btn-
     background-color: #006600;
     color: white;
 }
+
+

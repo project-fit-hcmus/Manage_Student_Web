@@ -198,6 +198,16 @@ thead tr th .sort-icon{
     background: transparent;
 }
 
+thead tr th form .sort-icon img{
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+}
+
+thead tr th form .sort-icon img:hover{
+    background-color: white;
+    
+}
+
 tbody tr td span form .delete-icon{
     background-color: #CC0000;
     color: white;
@@ -208,7 +218,7 @@ tbody tr td span form .delete-icon{
 }
 
 tbody tr td span  .edit-icon, tbody tr td span .btn-save, tbody tr td span .btn-cancel{
-        padding: 5px 15px 5px 15px;
+    padding: 5px 15px 5px 15px;
     border: 0px;
     border-radius: 15px;
     background-color: #006600;

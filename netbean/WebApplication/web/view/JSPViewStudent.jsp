@@ -75,13 +75,13 @@
                         <th>ADDRESS</th>
                         <th>NOTES</th>
                         <th>
-<!--                            <form action="./ViewStudentServlet" method="post">
+                            <form action="./ViewStudentServlet" method="post">
                                 <input type="hidden" name="selectedPage" value="sortStudent" />
-                                <input type="hidden" name="list" value="${data}">-->
-                                <button  onclick="SortTable();" class="sort-icon">
-                                  <img src="./media/ascending.png" alt="sort button" class="btnSort" ">
+                                <input type="hidden" name="kindOfSort" value="${kindOfSort}"/>
+                                <button class="sort-icon">
+                                    <img src="./media/ascending.png" alt="sort button" class="btnSort" name="KindOfSort" value="desc">
                                 </button>
-                            <!--</form>-->
+                            </form>
                             <script>
                                 document.getElementById("myStudentTable").setAttribute("data-sort", "none");
                             </script>

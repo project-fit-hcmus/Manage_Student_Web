@@ -66,6 +66,54 @@ public class StudentDAO {
         return students; 
     }
     
+    public List<Student> getAllStudentSortAsc(){
+        List<Student> students = new ArrayList<>();
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT *\n" +
+                        "FROM STUDENT \n" +
+                        "ORDER BY NAME ASC";
+            statement = connect.prepareStatement(sql);
+            rs = statement.executeQuery();
+            while(rs.next()){
+                Student st = new Student();
+                st.setID(rs.getString(1));
+                st.setNAME(rs.getString(2));
+                st.setBIRTH(rs.getDate(3));
+                st.setADDRESS(rs.getString(4));
+                st.setNOTES(rs.getString(5));
+                students.add(st);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }       
+        return students;
+    }
+    
+    public List<Student> getAllStudentSortDesc(){
+        List<Student> students = new ArrayList<>();
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT *\n" +
+                        "FROM STUDENT \n" +
+                        "ORDER BY NAME DESC";
+            statement = connect.prepareStatement(sql);
+            rs = statement.executeQuery();
+            while(rs.next()){
+                Student st = new Student();
+                st.setID(rs.getString(1));
+                st.setNAME(rs.getString(2));
+                st.setBIRTH(rs.getDate(3));
+                st.setADDRESS(rs.getString(4));
+                st.setNOTES(rs.getString(5));
+                students.add(st);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }       
+        return students;
+    }
+    
     public List<Student> findStudentByName(String name){
         List<Student> students =new ArrayList<>();
         statement = null;
@@ -139,6 +187,54 @@ public class StudentDAO {
             } 
         }
         return courses;
+    }
+    
+    public List<Course> getAllCourseSortAsc(){
+        List<Course> lists = new ArrayList<>();
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT *\n" +
+                        "FROM COURSE \n" +
+                        "ORDER BY NAME ASC";
+            statement = connect.prepareStatement(sql);
+            rs = statement.executeQuery();
+            while(rs.next()){
+                Course course = new Course();
+                course.setID(rs.getString(1));
+                course.setNAME(rs.getString(2));
+                course.setLECTURE(rs.getString(3));
+                course.setYEAR(rs.getInt(4));
+                course.setNOTES(rs.getString(5));
+                lists.add(course);    
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return lists;
+    }
+    
+    public List<Course> getAllCourseSortDesc(){
+        List<Course> lists = new ArrayList<>();
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT *\n" +
+                        "FROM COURSE \n" +
+                        "ORDER BY NAME DESC ";
+            statement = connect.prepareStatement(sql);
+            rs = statement.executeQuery();
+            while(rs.next()){
+                Course course = new Course();
+                course.setID(rs.getString(1));
+                course.setNAME(rs.getString(2));
+                course.setLECTURE(rs.getString(3));
+                course.setYEAR(rs.getInt(4));
+                course.setNOTES(rs.getString(5));
+                lists.add(course);    
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return lists;
     }
     
     public List<Course> findCourseByName(String name){
@@ -551,10 +647,6 @@ public class StudentDAO {
         }
     }
     
-    
-    
-    
-    //TEST 
     public void updateStudent(Student st){
    
         try{

@@ -31,7 +31,6 @@ public class ViewStudentServlet extends HttpServlet{
         response.setContentType("text/html; charset=UTF-8");
         StudentDAO studentDAO = new StudentDAO();   
         String action = request.getParameter("selectedPage");
-//        System.out.println(action);
         if(action ==  null){
             response.setContentType("text/html");
             response.getWriter().println("Nothing to show");
@@ -39,9 +38,11 @@ public class ViewStudentServlet extends HttpServlet{
         {
             if(action.equals("student")){
                 request.setAttribute("data",studentDAO.getAllStudent());
+                request.setAttribute("kindOfSort", "desc");     
                 request.getRequestDispatcher("view/JSPViewStudent.jsp").forward(request,response);
             }else if(action.equals("course")){
                 request.setAttribute("data",studentDAO.getAllCourse());
+                request.setAttribute("kindOfSort", "desc");
                 request.getRequestDispatcher("view/JSPViewCourse.jsp").forward(request,response);
 
             }else if(action.equals("student_course")){
@@ -75,14 +76,13 @@ public class ViewStudentServlet extends HttpServlet{
                 // lấy danh sách các khóa học để hiển thị lên màn hình Single Student 
                 List<CourseOfStudent> list  = studentDAO.getAllCourseOfStudent(idStudent);
                 request.setAttribute("data", list);
-//                System.out.println(list.get(0).getNAME());
-//                System.out.println(list.get(1).getNAME());
                 request.setAttribute("nameStudent", studentDAO.getStudentName(idStudent));     
                 request.getRequestDispatcher("/view/JSPSingleStudent.jsp").forward(request, response);
             }
             else if(action.equals("findStudent")){
                 String keyword = request.getParameter("keyword");
                 request.setAttribute("data", studentDAO.findStudentByName(keyword));
+                request.setAttribute("kindOfSort", "desc");       // TEST
                 request.getRequestDispatcher("/view/JSPViewStudent.jsp").forward(request, response);
             }
             else if(action.equals("findCourse")){
@@ -97,70 +97,46 @@ public class ViewStudentServlet extends HttpServlet{
                     lists = studentDAO.findCourseByYear(Integer.parseInt(keyword));
                 }
                 request.setAttribute("data", lists);
+                request.setAttribute("kindOfSort", "desc");
                 request.getRequestDispatcher("/view/JSPViewCourse.jsp").forward(request, response);
             }
-     
-        }
- 
-        
+            else if(action.equals("sortStudent")){
+                List<Student> lists = null;
+                String kind = request.getParameter("kindOfSort");
+                String type = "";
+                if(kind.equals("asc")){
+                    lists = studentDAO.getAllStudentSortAsc();
+                    type = "desc";
+                }else if(kind.equals("desc")){
+                    lists = studentDAO.getAllStudentSortDesc();
+                    type = "asc";
+                }
+                request.setAttribute("data", lists);
+                request.setAttribute("kindOfSort", type);
+                request.getRequestDispatcher("/view/JSPViewStudent.jsp").forward(request, response);
+            }
+            else if(action.equals("sortCourse")){
+                List<Course> courses = new ArrayList<>();
+                String kind = request.getParameter("kindOfSort");
+                String type = "";
+                if(kind.equals("desc")){
+                    courses = studentDAO.getAllCourseSortDesc();
+                    type = "asc";                    
+                }else if(kind.equals("asc")){
+                    courses = studentDAO.getAllCourseSortAsc();
+                    type = "desc";
+                }
+                request.setAttribute("data", courses);
+                request.setAttribute("kindOfSort", type);
+                request.getRequestDispatcher("/view/JSPViewCourse.jsp").forward(request, response);                
+            }     
+        }        
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
     }
-    // sắp xếp tăng dần theo tên 
-    public List<Student> SortAToZ(List<Student> input){
-        List<Student> studentList = new ArrayList<>(input);
-        Collections.sort(studentList, new Comparator<Student>() {
-            @Override
-            public int compare(Student s1, Student s2) {
-                return s1.getNAME().compareTo(s2.getNAME());
-            }
-        });
-        return studentList;
-    }
-    // sắp xếp giảm dần theo tên 
-    public List<Student> SortZToA(List<Student> input){
-        List<Student> studentList = new ArrayList<>(input);
-        Collections.sort(studentList, new Comparator<Student>() {
-            @Override
-            public int compare(Student s1, Student s2) {
-                return s2.getNAME().compareTo(s1.getNAME());
-            }
-        });
-        return studentList;
-    }
-    // kiểm tra danh sách đã được sắp xếp tăng dần hay chưa
-    public static boolean isSortedAscending(List<Student> studentList) {
-        for (int i = 0; i < studentList.size() - 1; i++) {
-            String currentName = studentList.get(i).getNAME();
-            String nextName = studentList.get(i + 1).getNAME();
-            if (currentName.compareTo(nextName) > 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-    // kiểm tra danh sách đã được sắp xếp giảm dần hay chưa
-    public static boolean isSortedDescending(List<Student> studentList) {
-        for (int i = 0; i < studentList.size() - 1; i++) {
-            String currentName = studentList.get(i).getNAME();
-            String nextName = studentList.get(i + 1).getNAME();
-            if (currentName.compareTo(nextName) < 0) {
-                return false;
-            }
-        }
-        return true;
-    }                         
-
+    
 }
     
 
-
-//some problems: 
-//1. hiện chữ tiếng việt trong bảng data(tên, địa chỉ, note)
-//2. Hiện ngày tháng năm sinh dạng yyyy/mm/dd
-
-// giả sử 0 tức là k sắp xếp 
-// 1 là sắp xếp tăng dần theo tên 
-// -1 là sắp xếp giảm dần theo tên

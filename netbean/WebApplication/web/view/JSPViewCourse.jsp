@@ -75,7 +75,15 @@
                         <th>LECTURE</th>
                         <th>YEAR</th>
                         <th>NOTES</th>
-                        <th>SORT</th>
+                        <th>
+                            <form action="./ViewStudentServlet" method="post">
+                                <input type="hidden" name="selectedPage" value="sortCourse" />
+                                <input type="hidden" name="kindOfSort" value="${kindOfSort}"/>
+                                <button class="sort-icon">
+                                    <img src="./media/ascending.png" alt="sort button" class="btnSort" name="KindOfSort" value="desc">
+                                </button>
+                            </form>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
