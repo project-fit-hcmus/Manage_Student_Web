@@ -4,7 +4,6 @@
  */
 package entity;
 
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,7 +36,7 @@ public class Student {
     }
     public String getID(){return this.ID;}
     public String getNAME(){
-        return encodeUTF8(this.NAME);    
+        return this.NAME;
     }
     public Date getBIRTH(){return this.BIRTH;}
     public String getADDRESS(){return this.ADDRESS;}
@@ -47,9 +46,4 @@ public class Student {
     public void setBIRTH(Date value){this.BIRTH = value;}
     public void setADDRESS(String value){this.ADDRESS = value;}
     public void setNOTES(String value){this.NOTES = value;}
-    private String encodeUTF8(String input) {
-        byte[] bytes = input.getBytes(StandardCharsets.UTF_8);
-        String output = new String(bytes,StandardCharsets.UTF_8);
-        return output;
-    }
 }

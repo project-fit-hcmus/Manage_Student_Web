@@ -45,7 +45,6 @@ body{
 }
 .header .row .group-btn{
     display:flex;
-    /*margin-top: 20px;*/
 }
 .header .row .group-btn .btn{
     padding:10px 30px 10px 30px;
@@ -65,7 +64,7 @@ body{
 }
 .header .row .btnSOY{
     background-color: #426B1F;    
-    color: black;
+    color: white;
 }
 
 .header .row .btnCourse{

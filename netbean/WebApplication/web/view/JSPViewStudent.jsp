@@ -13,7 +13,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP View Student Page</title>
         <link rel="stylesheet" href="./css/styleStudent.css">
-        <!--<script src="./script/main.js"> </script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
@@ -68,7 +67,7 @@
             <table class="table_body" id="myStudentTable" >
                 <thead>
                     <tr>
-                        <th>ON</th>
+                        <th>INDEX</th>
                         <th>ID</th>
                         <th>NAME</th>
                         <th>BIRTHDAY</th>
@@ -88,10 +87,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    
-                   <c:forEach var="item" items="${data}" varStatus="loop">
-                     
+                <tbody>                    
+                   <c:forEach var="item" items="${data}" varStatus="loop">                    
                     <tr>
                         <td><strong>${loop.index + 1}</strong></td>
                         <td>${item.getID()}</td>
@@ -121,7 +118,7 @@
 
         </main>
     </div>
-    <script contentType="text/javascript; charset=UTF-8" pageEncoding="UTF-8">           // lỗi tiếng việt
+    <script contentType="text/javascript; charset=UTF-8" pageEncoding="UTF-8">           
     var isEditing = false;
     $(document).ready(function (){
         // xử lý button edit
@@ -130,7 +127,7 @@
         var originAddr;
         var originNote;
         $('#myStudentTable').on('click','.edit-icon',function(){
-            alert("click on edit button");
+//            alert("click on edit button");
             isEditing = true;
 
             var row = $(this).closest('tr');
@@ -223,9 +220,5 @@
         });
     });                 
     </script>                                
-    
     </body>
-
 </html>
-<!-- create table instruction: https://www.youtube.com/watch?v=Ay8BXbAmEYM -->
-<!--reference edit row in table : https://github.com/gerasimcode/jquery/blob/main/inlineEditing.html -->

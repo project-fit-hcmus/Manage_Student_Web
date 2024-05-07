@@ -5,8 +5,6 @@
 package Database;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -28,20 +26,4 @@ public class DBConnection {
         }
         return connect;
     }
-//    public void disConnect(){
-//        try {
-//            connect.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-
-//    public Connection getConnect(){
-//        return this.connect;
-//    }
-    /**
-     * @param args the command line arguments
-     */
-
-    
 }

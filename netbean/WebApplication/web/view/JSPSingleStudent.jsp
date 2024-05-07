@@ -16,7 +16,6 @@
         <div class="container-fluid header">
         <div class="row">
             <div class="col-md-6 group-search">
-                <!--<p class="col-md-2 title" ><strong>List Student</strong></p>-->
                 <form class="col-md-6 title" action="./ViewStudentServlet" method="post" style="padding-top:15px">
                     <input type="hidden" name="selectedPage" value="home" />
                     <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;" style="text-decoration: none;"><strong>List Student</strong></a>
@@ -39,9 +38,7 @@
                 <form class="btn btnStudent" action="./ViewStudentServlet" method="post">
                     <input type="hidden" name="selectedPage" value="student" />
                     <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;">Student</a>
-                </form>
-     
-                <!--<a href="#" class="btn btnStudent">Student</a>-->     
+                </form>  
             </div>
         </div>
     </div>
@@ -59,14 +56,13 @@
             <table class="table_body" id="myCourseTable">
                 <thead>
                     <tr>
-                        <th>ON</th>
+                        <th>INDEX</th>
                         <th>ID</th>
                         <th>NAME</th>
                         <th>LECTURE</th>
                         <th>YEAR</th>
                         <th>NOTES</th>
                         <th>GRADE</th>
-                        <th>SORT</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,11 +75,8 @@
                             <td>${item.getYEAR()}</td>
                             <td>${item.getNOTES()}</td>
                             <td>${item.getGRADE()}</td>
-                            <td>Nothing</td>
-                        </tr>
-                    
+                        </tr>                    
                      </c:forEach>
-
                 </tbody>
             </table>
     </body>

@@ -150,7 +150,6 @@ table, th, td{
 
 
 .table-sample{
-    /* min-height: 100vh; */
     background: url("../media/mainBg.jpg");
  
     
@@ -239,6 +238,10 @@ tbody tr td span form .delete-icon{
     border: 0px;
 }
 
+tbody tr td span form .delete-icon:hover{
+    background-color: #da7d7d;
+}
+
 tbody tr td span  .edit-icon, tbody tr td span .btn-save, tbody tr td span .btn-cancel{
         padding: 5px 15px 5px 15px;
     border: 0px;
@@ -247,4 +250,7 @@ tbody tr td span  .edit-icon, tbody tr td span .btn-save, tbody tr td span .btn-
     color: white;
 }
 
+tbody tr td span .edit-icon:hover, tbody tr td span .btn-save:hover, tbody tr td span .btn-cancel:hover{
+    background-color: #5ca65c;
+}
 

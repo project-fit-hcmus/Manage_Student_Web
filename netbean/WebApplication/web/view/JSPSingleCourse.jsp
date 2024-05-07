@@ -80,7 +80,7 @@
             <table class="table_body">
                 <thead>
                     <tr>
-                        <th>ON</th>
+                        <th>INDEX</th>
                         <th>ID</th>
                         <th>NAME</th>
                         <th>BIRTHDAY</th>
@@ -104,17 +104,13 @@
                                     <input type="hidden" name="type" value="delete-student-in-course">
                                     <input type="hidden" name="id-student" value="${item.getID()}">
                                     <input type="hidden" name="id-course" value="${idCourse}">
-                                    <button class="delete-icon" type="submit" >
-                                        <img src="./media/trash.png" alt="trash-icon">
-                                    </button>
+                                    <button class="delete-icon" type="submit" >Delete </button>
                                 </form>
                             </span>
                         </td>
                     </tr>
                      </c:forEach>
-
                 </tbody>
-            </table>
-   
+            </table>   
     </body>
 </html>

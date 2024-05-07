@@ -14,9 +14,9 @@
         
     </head>
     <body>
-        <%!
+    <%!
     int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-%>
+    %>
         <div class="container-fluid header">
         <div class="row">
             <div class="col-md-6 group-search">
@@ -33,7 +33,7 @@
             <div class="col-md-6 group-btn">
                 <form class="btn btnSOY" action="./ViewStudentServlet" method="post">
                     <input type="hidden" name="selectedPage" value="student_course" />
-                    <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;">Student Of Year</a>
+                    <a href="#" class="col-md-4" onclick="this.parentNode.submit(); return false;" style="color: white">Student Of Year</a>
                 </form>
                 <form class="btn btnCourse" action="./ViewStudentServlet" method="post">
                     <input type="hidden" name="selectedPage" value="course" />
@@ -59,12 +59,12 @@
             <table class="table_body" id="myCourseTable">
                 <thead>
                     <tr>
-                        <th>ON</th>
+                        <th>INDEX</th>
                         <th>ID</th>
                         <th>NAME</th>
-                        <th>COURSE</th>
-                        <th>GRADE</th>
-                        <th>SORT</th>
+                        <th>BIRTHDAY</th>
+                        <th>ADDRESS</th>
+                        <th>NOTES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,15 +73,15 @@
                             <td><strong>${loop.index + 1}</strong></td>
                             <td>${item.getID()}</td>
                             <td>${item.getNAME()}</td>
-                            <td>${item.getCOURSE()}</td>
-                            <td>${item.getGRADE()}</td>
-                            <td>nothing</td>
-                        </tr>
-                    
+                            <td>${item.getBIRTH()}</td>
+                            <td>${item.getADDRESS()}</td>
+                            <td>${item.getNOTES()}</td>
+                        </tr>                   
                      </c:forEach>
-
                 </tbody>
             </table>
-    
     </body>
 </html>
+
+
+

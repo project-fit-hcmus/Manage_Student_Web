@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 import entity.*;
-import jakarta.mail.util.StreamProvider;
 import java.io.PrintWriter;
 
 
@@ -90,8 +89,6 @@ public class updateDataServlet extends HttpServlet  {
 
                 // xóa trong database
                 boolean result = studentDAO.deleteStudentInCourse(idStudent, idCourse);
-//                System.out.println("result-delete: " + result);
-//                System.out.println(studentDAO.getStudentInCourse(idCourse).size());
                 req.setAttribute("data", studentDAO.getStudentInCourse(idCourse));
                 req.setAttribute("idCourse", idCourse);
                 req.setAttribute("nameCourse", studentDAO.getCourseName(idCourse));
@@ -151,23 +148,12 @@ public class updateDataServlet extends HttpServlet  {
                  String lecture = req.getParameter("newLecture");
                  String year = req.getParameter("newYear");
                  
-//                 System.out.println("ID Course: " + idCourse);
-//                 System.out.println("Name: " + name);
-//                 System.out.println("Lecture: " + lecture);
-//                 System.out.println("Year: " + year);
-//                 System.out.println("Notes: " + notes);
-                 
                  studentDAO.updateCourse(idCourse, name, lecture, Integer.parseInt(year), notes);
                  resp.setContentType("text/plain");
                 PrintWriter out = resp.getWriter();
                 out.print("Success"); // Hoặc bất kỳ thông báo thành công nào khác
-                out.flush();
-                 
-                
-            }
-                
-         
-            
+                out.flush();                               
+            }          
         }
     }
 
@@ -175,7 +161,5 @@ public class updateDataServlet extends HttpServlet  {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
     }
-    
-    
-    
+       
 }

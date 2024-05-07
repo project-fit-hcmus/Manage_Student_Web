@@ -69,7 +69,7 @@
             <table class="table_body" id="myCourseTable">
                 <thead>
                     <tr>
-                        <th>ON</th>
+                        <th>INDEX</th>
                         <th>ID</th>
                         <th>NAME</th>
                         <th>LECTURE</th>
@@ -124,7 +124,6 @@
         var originYear;
         var originNote;
         $('#myCourseTable').on('click','.edit-icon',function(){
-            alert("click on edit button");
             isEditing = true;
 
         var row = $(this).closest('tr');

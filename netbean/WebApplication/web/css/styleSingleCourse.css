@@ -59,7 +59,6 @@ body{
 }
 
 .header .row .group-btn{
-    /*margin-top: -20px;*/
     display: flex;
 }
 .header .row .group-btn .btn{
@@ -122,7 +121,6 @@ body{
 
 .title-content p{
     height: 10px;
-    /*padding-top: 10px;*/
     color: gray;
     padding-left: 30px;
     
@@ -151,7 +149,6 @@ table, th, td{
 
 
 .table-sample{
-    /* min-height: 100vh; */
     background: url("../media/mainBg.jpg");
  
     
@@ -226,6 +223,16 @@ table button img{
     height: 80%;
 }
 
-table button:hover{
-    background-color: #25473c;
+.delete-icon{
+    background-color: #CC0000;
+    color: white;
+    border-radius: 15px;
+    padding: 5px 16px 5px 15px;
+    margin-top: 10px;
+    border: 0px;
 }
+
+.delete-icon:hover{
+    background-color: #da7d7d;
+}
+

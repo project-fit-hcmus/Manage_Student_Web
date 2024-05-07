@@ -46,7 +46,6 @@ body{
 }
 .header .row .group-btn{
     display:flex;
-    /*margin-top: 20px;*/
 }
 .header .row .group-btn .btn{
     padding:10px 30px 10px 30px;
@@ -136,7 +135,6 @@ table, th, td{
 
 
 .table-sample{
-    /* min-height: 100vh; */
     background: url("../media/mainBg.jpg");
  
     

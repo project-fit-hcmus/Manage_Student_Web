@@ -38,7 +38,6 @@ body{
 }
 .header .row .group-btn{
     display:flex;
-    margin-top: 20px;
 }
 .header .row .group-btn .btn{
     padding:10px 30px 10px 30px;
@@ -217,6 +216,13 @@ tbody tr td span form .delete-icon{
     border: 0px;
 }
 
+tbody tr td span form .delete-icon:hover{
+    background-color: #da7d7d;
+}
+
+tbody tr td span .edit-group .edit-icon:hover, tbody tr td span .edit-group .btn-save:hover, tbody tr td span .edit-group .btn-cancel:hover{
+    background-color: #5ca65c;
+}
 tbody tr td span  .edit-icon, tbody tr td span .btn-save, tbody tr td span .btn-cancel{
     padding: 5px 15px 5px 15px;
     border: 0px;
@@ -224,3 +230,4 @@ tbody tr td span  .edit-icon, tbody tr td span .btn-save, tbody tr td span .btn-
     background-color: #006600;
     color: white;
 }
+

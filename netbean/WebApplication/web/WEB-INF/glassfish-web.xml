@@ -34,15 +34,11 @@
       <welcome-file>index.html</welcome-file>
       <welcome-file>JSPViewStudent.jsp</welcome-file>
       <wellcome-file>JSPViewCourse.jsp</wellcome-file>
-      <wellcome-file>JSPStudentCourse.jsp</wellcome-file>
       <wellcome-file>JSPSingleCourse.jsp</wellcome-file>
       <wellcome-file>JSPAddStudent.jsp</wellcome-file>
       <wellcome-file>JSPAddCourse.jsp</wellcome-file>
       <wellcome-file>JSPAddStudentToCourse.jsp</wellcome-file>
       <wellcome-file>JSPSingleStudent.jsp</wellcome-file>
       <wellcome-file>JSPStudentOfYear.jsp</wellcome-file>
-
-
-
   </welcome-list-file>
 </glassfish-web-app>

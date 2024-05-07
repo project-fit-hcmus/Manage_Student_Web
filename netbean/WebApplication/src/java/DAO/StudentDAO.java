@@ -5,10 +5,7 @@
 package DAO;
 import Database.DBConnection;
 import entity.*;
-import java.io.UnsupportedEncodingException;
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -336,26 +333,26 @@ public class StudentDAO {
     }
     
     public boolean deleteStudentInCourse(String idStudent, String idCourse) {
-    int rowsUpdated = 0;
-    try {
-        String sql = "DELETE FROM COURSE_STUDENT WHERE STUDENT_ID = ? AND COURSE_ID = ?";
-        PreparedStatement statement = connect.prepareStatement(sql);
-        statement.setString(1, idStudent);
-        statement.setString(2, idCourse);
-
-        rowsUpdated = statement.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
+        int rowsUpdated = 0;
         try {
-            if (statement != null)
-                statement.close();
-        } catch (SQLException m) {
-            m.printStackTrace();
+            String sql = "DELETE FROM COURSE_STUDENT WHERE STUDENT_ID = ? AND COURSE_ID = ?";
+            PreparedStatement statement = connect.prepareStatement(sql);
+            statement.setString(1, idStudent);
+            statement.setString(2, idCourse);
+
+            rowsUpdated = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException m) {
+                m.printStackTrace();
+            }
         }
-    }
-    return rowsUpdated > 0;
-}   
+        return rowsUpdated > 0;
+    }   
     
     public void DeleteCourseByID(String id){
         try{
@@ -606,34 +603,32 @@ public class StudentDAO {
         return lists;
     }
 
-    public List<StudentOfYear> getAllStudentInYear(int year){
+  
+    public List<Student> getAllStudentOfYear(int year){
+        List<Student> lists = new ArrayList<>();
         ResultSet rs = null;
-        List<StudentOfYear> lists =  new ArrayList<>();
         try{
-            String sql = "SELECT ST.ID_STUDENT, ST.NAME, CR.NAME, CS.GRADE\n" +
-                        "FROM STUDENT ST, COURSE CR, COURSE_STUDENT CS\n" +
-                        "WHERE ST.ID_STUDENT = CS.STUDENT_ID AND CR.ID_COURSE = CS.COURSE_ID AND CR.YEAR = ?";
+            String sql = "SELECT DISTINCT ST.* \n" +
+                        "FROM STUDENT ST, COURSE_STUDENT CS, COURSE CR\n" +
+                        "WHERE ST.ID_STUDENT = CS.STUDENT_ID AND CR.ID_COURSE = CS.COURSE_ID AND CR.YEAR = " + year;
             statement = connect.prepareStatement(sql);
-            statement.setInt(1, year);
             rs = statement.executeQuery();
             while(rs.next()){
-                StudentOfYear temp = new StudentOfYear();
-                temp.setID(rs.getString(1));
-                temp.setNAME(rs.getString(2));
-                temp.setCOURSE(rs.getString(3));
-                temp.setGRADE(rs.getFloat(4));
-                lists.add(temp);
+                Student student = new Student();
+                student.setID(rs.getString(1));
+                student.setNAME(rs.getString(2));
+                student.setBIRTH(rs.getDate(3));
+                student.setADDRESS(rs.getString(4));
+                student.setNOTES(rs.getString(5));
+                lists.add(student);
             }
-            
         }catch(SQLException e){
             e.printStackTrace();
         }
+        
         return lists;
     }
-
-    
-    
-    
+  
     public void updateCourse(String id, String name, String lecture, int year, String notes){
         try{
             String sql = "UPDATE COURSE\n" +
@@ -661,27 +656,3 @@ public class StudentDAO {
         }
     }
 }
-
-
-
-
-
-
-//public void updateStudent(String id, String name, String address, String notes) throws UnsupportedEncodingException{
-//        String encodeName = new String(name.getBytes("UTF-8"),"UTF-8");
-//        System.out.println("Name after encode : " + encodeName);
-//                System.out.println("Name before encode : " + name);
-//
-//        
-//            
-//        try{
-//            String sql = "UPDATE STUDENT\n" +
-//                        "SET NAME = '"+ encodeName +"', ADDRESS = '"+address+"' , NOTES ='"+notes+"'\n" +
-//                        "WHERE ID_STUDENT ='"+id+"' ";
-//            statement = connect.prepareStatement(sql);
-//            System.out.println(sql);
-//            statement.executeUpdate();
-//        }catch(SQLException e){
-//            e.printStackTrace();
-//        }
-//    }

@@ -45,13 +45,15 @@ public class ViewStudentServlet extends HttpServlet{
                 request.setAttribute("kindOfSort", "desc");
                 request.getRequestDispatcher("view/JSPViewCourse.jsp").forward(request,response);
 
-            }else if(action.equals("student_course")){
+            }
+            else if(action.equals("student_course")){
                 int currentYear = LocalDate.now().getYear();
-                List<StudentOfYear> lists = studentDAO.getAllStudentInYear(currentYear);
+                List<Student> lists = studentDAO.getAllStudentOfYear(currentYear);
                 request.setAttribute("data", lists);
                 request.setAttribute("year", currentYear);
                 request.getRequestDispatcher("view/JSPStudentOfYear.jsp").forward(request,response);
-            }else if(action.equals("addStudent")){
+            }
+            else if(action.equals("addStudent")){
                 request.getRequestDispatcher("view/JSPAddStudent.jsp").forward(request, response);
             }else if(action.equals("addCourse")){
                 request.getRequestDispatcher("view/JSPAddCourse.jsp").forward(request, response);
@@ -82,18 +84,16 @@ public class ViewStudentServlet extends HttpServlet{
             else if(action.equals("findStudent")){
                 String keyword = request.getParameter("keyword");
                 request.setAttribute("data", studentDAO.findStudentByName(keyword));
-                request.setAttribute("kindOfSort", "desc");       // TEST
+                request.setAttribute("kindOfSort", "desc");       
                 request.getRequestDispatcher("/view/JSPViewStudent.jsp").forward(request, response);
             }
             else if(action.equals("findCourse")){
                 String criteria = request.getParameter("criteria");
                 String keyword = request.getParameter("keyword");
                 List<Course> lists = null;
-//                System.out.println(criteria);
-//                System.out.println(keyword);
                 if(criteria.equals("name")){        // find by name
                     lists = studentDAO.findCourseByName(keyword);
-                }else{      //find by year
+                }else{                              //find by year
                     lists = studentDAO.findCourseByYear(Integer.parseInt(keyword));
                 }
                 request.setAttribute("data", lists);
